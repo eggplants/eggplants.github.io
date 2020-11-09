@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Clarity</title>
+    <link>https://eggplants.github.io/</link>
+    <description>Recent content on Clarity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2020-, eggplants(haruna); all rights reserved.</copyright>
+    <lastBuildDate>Mon, 09 Nov 2020 20:13:55 +0900</lastBuildDate><atom:link href="https://eggplants.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>はい</title>
+      <link>https://eggplants.github.io/test/</link>
+      <pubDate>Mon, 09 Nov 2020 20:13:55 +0900</pubDate>
+      
+      <guid>https://eggplants.github.io/test/</guid>
+      <description>これはなに  静的サイトジェネレータHugoくんで作ったページ テーマにはClarityを使用した  投稿方法  プロジェクトルートでhugo new content/&amp;lt;post_title&amp;gt;.md 生成された記事ヘッダ部にtags: [&amp;quot;tag1&amp;quot;, &amp;quot;tag2&amp;quot;, ...]とかdescription: &amp;quot;desc.&amp;quot;を追記 記事書いてAdd, Commit, Push hugo serverでlocalhost:1333にテストサイトを立てられるので確認が楽 簡単！  </description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://eggplants.github.io/about/</link>
+      <pubDate>Sat, 24 Oct 2020 05:17:02 +0900</pubDate>
+      
+      <guid>https://eggplants.github.io/about/</guid>
+      <description>素性  名前: 春名航亨 所属: 筑波大学 情報学群 知識情報・図書館学類(2018年入学) 趣味: シェル芸、ネット音楽、読書 コード: 大抵GitHubかGistにあげてます.  作ったWebページ等のリンク集 やる気のないページ群.
+JKJ - 2018年春AB 情報基礎実習の課題.
+初めてWebページ公開した.
+statistics - 2018年秋AB 統計の課題をMDで書いて出した.
+やってたので数式を綺麗に書きたくてwordでなくMDを使った.
+English - 2018年秋AB 斎藤一の英語テストに向けて作った単語帳.
+今は移転.
+opac - 2019年春AB 知識情報演習Ⅰの課題.
+meyasu - 2019年春AB データ工学概論の課題.春日目安箱データベース+作成補助ページ.
+stbにセキュリティ対策して移転したい.
+index - 2019年春B このページ.リポジトリはここ.
+応用体育(柔道) - 2019年春B 応用柔道の暗記課題用ページ.
+deepl-select-jump - 20xx年春AB 選択中テキストを右クリックしてDeepL翻訳に投げられるChrome拡張.
+車輪の再発明であることがのちに判明.
+Rapsodo Manager - 2020年春AB 主専攻実習でチーム開発.
+野球部の計測データ管理アプリ.
+Web Practice - 2020年春A Javascriptのお勉強.この本.
+かんたん検索 - 2020年春AB マークアップ言語の課題.
+書誌情報をCGIから呼んだXSLTで逐次パース.
+不審者セリフ - 2020年春AB 日本不審者情報センター不審者セリフ集を表に起こした.</description>
+    </item>
+    
+  </channel>
+</rss>
