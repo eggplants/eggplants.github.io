@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+    <meta http-equiv="refresh" content="3;URL=https://github.com/eggplants">
+    -->
+    <title>🎶…🌵…⏳…💁…</title>
+  </head>
+  <body>
+    <script>
+      (function() {
+        "use strict";
+        var t = document.title.split(/(?<=)/u);
+        Array.prototype.rotate = function(n) {
+          n = n % this.length;
+          return this.slice(n, this.length).concat(this.slice(0, n));
+        }
+        var cnt = 0;
+        setInterval(() => {
+          t = t.rotate(2);
+          document.title = t.join('');
+        }, 500);
+        setInterval(() => {
+          if (cnt == 3) {
+            window.location.href = "https://github.com/eggplants";
+            cnt++;
+          } else if (cnt < 3) {
+            cnt++;
+          }
+        }, 1000);
+      }());
+    </script>
+    <style>
+      body {
+        background: linear-gradient(135deg, rgba(255, 0, 0, 1), rgba(255, 136, 0, 1), rgba(255, 255, 0, 1), rgba(136, 255, 0, 1), rgba(0, 255, 0, 1), rgba(0, 136, 255, 1), rgba(0, 0, 255, 1), rgba(136, 0, 255, 1), rgba(255, 0, 0, 1)) 0% center/200%;
+        animation: gaming-back 1s linear infinite;
+      }
+      @keyframes gaming-back {
+        0.0% {
+          background-position-x: 0%;
+        }
+        100.0% {
+          background-position-x: 200%;
+        }
+      }
+    </style>
+  </body>
+</html>
