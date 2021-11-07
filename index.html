@@ -1,48 +1,128 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!--
-    <meta http-equiv="refresh" content="3;URL=https://github.com/eggplants">
-    -->
-    <title>🎶…🌵…⏳…💁…</title>
-  </head>
-  <body>
-    <script>
-      (function() {
-        "use strict";
-        var t = document.title.split(/(?<=)/u);
-        Array.prototype.rotate = function(n) {
-          n = n % this.length;
-          return this.slice(n, this.length).concat(this.slice(0, n));
-        }
-        var cnt = 0;
-        setInterval(() => {
-          t = t.rotate(2);
-          document.title = t.join('');
-        }, 500);
-        setInterval(() => {
-          if (cnt == 3) {
-            window.location.href = "https://github.com/eggplants";
-            cnt++;
-          } else if (cnt < 3) {
-            cnt++;
-          }
-        }, 1000);
-      }());
-    </script>
-    <style>
-      body {
-        background: linear-gradient(135deg, rgba(255, 0, 0, 1), rgba(255, 136, 0, 1), rgba(255, 255, 0, 1), rgba(136, 255, 0, 1), rgba(0, 255, 0, 1), rgba(0, 136, 255, 1), rgba(0, 0, 255, 1), rgba(136, 0, 255, 1), rgba(255, 0, 0, 1)) 0% center/200%;
-        animation: gaming-back 1s linear infinite;
+
+<head>
+  <title>🎶…🌵…⏳…💁…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap">
+</head>
+
+<body>
+  <script>
+    (function () {
+      "use strict";
+      var t = document.title.split(/(?<=)/u);
+      Array.prototype.rotate = function (n) {
+        n = n % this.length;
+        return this.slice(n, this.length).concat(this.slice(0, n));
       }
-      @keyframes gaming-back {
-        0.0% {
-          background-position-x: 0%;
+      var cnt = 0;
+      setInterval(() => {
+        t = t.rotate(2);
+        document.title = t.join('');
+      }, 500);
+      setInterval(() => {
+        if (cnt == 3) {
+          window.location.href = "https://github.com/eggplants";
+          cnt++;
+        } else if (cnt < 3) {
+          cnt++;
         }
-        100.0% {
-          background-position-x: 200%;
-        }
+      }, 1000);
+    }());
+  </script>
+  <div class="wrapper">
+    <div class="vertical">
+      今日の仕事は、<br>
+      楽しみですか🎶
+    </div>
+  </div>
+  <style>
+    .wrapper {
+      height: 100%;
+      width: 100%;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      position: absolute;
+      background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+      background-size: 1800% 1800%;
+      -webkit-animation: rainbow 5s ease infinite;
+      -z-animation: rainbow 5s ease infinite;
+      -o-animation: rainbow 5s ease infinite;
+      animation: rainbow 5s ease infinite;
+    }
+
+    @-webkit-keyframes rainbow {
+      0% {
+        background-position: 0% 82%
       }
-    </style>
-  </body>
+
+      50% {
+        background-position: 100% 19%
+      }
+
+      100% {
+        background-position: 0% 82%
+      }
+    }
+
+    @-moz-keyframes rainbow {
+      0% {
+        background-position: 0% 82%
+      }
+
+      50% {
+        background-position: 100% 19%
+      }
+
+      100% {
+        background-position: 0% 82%
+      }
+    }
+
+    @-o-keyframes rainbow {
+      0% {
+        background-position: 0% 82%
+      }
+
+      50% {
+        background-position: 100% 19%
+      }
+
+      100% {
+        background-position: 0% 82%
+      }
+    }
+
+    @keyframes rainbow {
+      0% {
+        background-position: 0% 82%
+      }
+
+      50% {
+        background-position: 100% 19%
+      }
+
+      100% {
+        background-position: 0% 82%
+      }
+    }
+
+    .vertical {
+      -ms-writing-mode: tb-rl;
+      writing-mode: vertical-rl;
+      font-size: 8vh;
+      display: inline-block;
+      position: relative;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Rampart One', cursive;
+    }
+  </style>
+</body>
+
 </html>
