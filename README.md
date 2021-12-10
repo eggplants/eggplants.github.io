@@ -1,3 +1,1 @@
-# eggplants.github.io
-
-hey
+# <egpl.ga/index.html>
