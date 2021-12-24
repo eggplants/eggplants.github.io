@@ -7,7 +7,7 @@
   };
   var cnt = 0;
   setInterval(() => {
-    document.title = t.rotate(2).join("");
+    document.title = (t = t.rotate(2)).join("");
   }, 500);
   var i = setInterval(() => {
     if (cnt == 3) {
