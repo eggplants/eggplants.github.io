@@ -2,18 +2,17 @@
   "use strict";
   var t = document.title.split(/(?<=)/u);
   Array.prototype.rotate = function (n) {
-    n = n % this.length;
+    n %= this.length;
     return this.slice(n, this.length).concat(this.slice(0, n));
   };
   var cnt = 0;
   setInterval(() => {
-    t = t.rotate(2);
-    document.title = t.join("");
+    document.title = t.rotate(2).join("");
   }, 500);
-  setInterval(() => {
+  var i = setInterval(() => {
     if (cnt == 3) {
       window.location.href = "https://github.com/eggplants";
-      cnt++;
+      clearInterval(i);
     } else if (cnt < 3) {
       cnt++;
     }
