@@ -1,1 +1,1 @@
-# <egpl.ga/index.html>
+# [egpl.ga](https://egpl.ga)
