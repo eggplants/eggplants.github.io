@@ -1,5 +1,6 @@
 (function () {
   "use strict";
+  console.log('%c Hi!', 'font-size:180px;background:url(https://raw.githubusercontent.com/eggplants/myicons/master/selfie_mini.png)no-repeat;');
   var t = document.title.split(/(?<=)/u);
   Array.prototype.rotate = function (n) {
     n %= this.length;
