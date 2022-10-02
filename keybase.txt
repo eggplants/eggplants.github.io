@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/egpl0
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://egpl.dev
+  * I am egpl0 (https://keybase.io/egpl0) on keybase.
+  * I have a public key with fingerprint 8117 1C84 0F81 C884 3F1F  A171 E84F 494A D653 9CE2
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01209724bd5ab5dbda1800cac143d27e4ba6ae99818ab55e193e8b6096d5268c52c10a",
+      "fingerprint": "81171c840f81c8843f1fa171e84f494ad6539ce2",
+      "host": "keybase.io",
+      "key_id": "e84f494ad6539ce2",
+      "kid": "0101c98f275f59b4bb1fdec78eb123c317ebc4190c4e17f98518260298dd91e691d40a",
+      "uid": "c9bd67e2dd6b4e51e6ec03596d9fdb19",
+      "username": "egpl0"
+    },
+    "service": {
+      "hostname": "egpl.dev",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1664722018,
+  "expire_in": 157680000,
+  "prev": "23385d3783d4df7c0b866fed79b00f9e9bf096bd481d02d5e5563c904338cc4b",
+  "seqno": 103,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMNpAnicbVJ9TFVlGAciDBCGdGeAaXBExGJw3vN9rmItv4BIAovUSddz3vc9cAPv
+uV+AgJTOrTkugpFNU2RKModG04uFLcALCOOjzEnChoGuJopCSEG06aBzWG790V/P
+3uf5/X7P73me91rQc14B3g/SklMGtlX/6t3XVpXvBcWzcgkhq6iIMJYQuXgh4DyE
+HU5TrhkRRoIEFCnyFCMjVpJZJCMJCCQJJQgYGlE8ZmSJk7AoCkDQ6iwGIo0FmSNF
+DrEUJ0CWgoCUiDhCMVuysd1qN1ucmqwAAA+gwJCKoAWBoRWgSFoKC4zCiIyEOJYW
+IaY0Yo7q0BmaOVly4HizquW0h2nB3v/gn/kmARQFheJZhRVlRpaBgjDkBSwDioY0
+4LEMGSCSkMGAV0SBBQLFkZQoICQCzIkAMQu+8xfkoCgjjscUQpzMYFYDYEjSrDal
+qCAZiDrQge0WaQ/WXWVb80iiNI7QUgVmiPWt6mP8pxyPcIFGstpVpwrVPC2b43Ra
+HUad5Syy6rBCLJv+FTDJZgvSFqgxCrDdYVYthBFoSOg064qA4xieokggxBF4r9Vs
+xyazjmB5TjsWSep9tHZGgqJpgUU0L9CIQQoPSVngOAUjXpRJUhGxKCva5WTECACR
+FGIxy3I0FElG40HIyIQ+ks2iatokrRmVsjVRhznbIjnz7ZgobW/b5evlHeDl97yP
+/rW8AvxDnn24pdUhXkOVnjMpjUR+dTK3ZetlW8dR6V3TXFKf319965jeq2mj3SP1
+NuuND9e8KJb7JBU/7Zz5qSqscltQ5dqdG74RprZs+vu7TT3TnuD7r/jc2T1Hf/3W
+JEevKSsfqDg517T4eJAhbPt8wv3Bs3TUTXfn1Sa+JXxzR3HXhoLE0yttxbFGGJID
+oBIxEhNpWDnb3BNIOV0HjxS+X3gl6dTqctWVcbw2K/JlpmVfce8LxO2ohMaXRide
+3dgd47qw/6Hgm1N34Ure6S86llU5fgnuN4Cyu0WTqbP9v/WcSNjRf/nNFW9szrVl
+/rjUzTs8v385GP84q7W+Zr/NvYQNUj/3dwVuLbspv2fselgR0Z2a/uj7W+TqsZK5
+9PU56+rdaw8MHm1snPiqP9H1x93w6mvGHyB4On8ujG/IbrvnbknyzEwF+q0ar1ve
+UHsjduepkKqsfX25YRPBGf2LjyVbLd01P7vPx/Z2jCYefP1i/UQlVZzyZIzyN0Vm
+HKh17pppsR/YMT92ZgXf7BOT8uf1jYvGo+t8pz9rD82MPzb3AD1WY7zru1ogihy+
+c2L7kajopvaTca7moaHhi9c//tR3+a2R6T2risIPO0KDX8t88okwfGnso5KEVgMe
+n1rU0FkZeni25tuBS4fShyfnK1jL7tQPWpcYy86lPSq9HQEMgdEJU6qBemevp8JD
+31t/ftnb/wDhab7X
+=Caz4
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/egpl0
+
+==================================================================
