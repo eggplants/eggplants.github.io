@@ -5,32 +5,44 @@
   <title>🎶…🌵…⏳…💁…</title>
   <meta charset="utf-8">
   <meta name="description" content="🎶">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="eggplants,github,mypage">
   <meta name="author" content="egpl0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:creator" content="@egpl0">
   <meta name="twitter:site" content="@egpl0">
   <meta property="og:url" content="https://egpl.dev">
   <meta property="og:title" content="🎶…🌵…⏳…💁…">
   <meta property="og:description" content="🎶">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" as="style">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap">
-  <link rel="stylesheet" href="https://eggplants.github.io/css/index.css">
-  <link rel="icon" href="https://egpl.dev/zengaku_mypage/img/favicon.ico">
-  <meta property="og:image" content="https://raw.githubusercontent.com/eggplants/zengaku_mypage/master/img/selfie.png">
+  <meta property="og:image" content="img/selfie.png">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/endless-river.min.css">
+  <link rel="icon" href="img/favicon.ico">
+  <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/endless-river.min.js"></script>
-  <link type="text/css" rel="stylesheet" href="css/endless-river.min.css">
+  <script src="https://unpkg.com/rainbow-elements@latest/dist/rainbow-elements.js"></script>
+  <script src="js/index.js"></script>
 </head>
 
 <body>
-  <script src="https://eggplants.github.io/js/index.js"></script>
+  <noscript>&gt;&gt;&gt;<a href="https://github.com/eggplants">https://github.com/eggplants</a>&lt;&lt;&lt;</noscript>
   <div class="wrapper">
-    <div class="vertical">
-      今日の仕事は、<br>
-      楽しみですか🎶
-    </div>
+    <ul id="river">
+      <li><img src="img/o-0.png"></li>
+      <li><img src="img/o-1.png"></li>
+      <li><img src="img/o-0.png"></li>
+      <li><img src="img/o-1.png"></li>
+      <li><img src="img/o-0.png"></li>
+      <li><img src="img/o-1.png"></li>
+      <li><img src="img/o-0.png"></li>
+      <li><img src="img/o-1.png"></li>
+    </ul>
   </div>
+  <script>
+    $(document).ready(() => {
+      $("#river").endlessRiver({ speed: 1000, pause: false });
+    });
+  </script>
 </body>
 
 </html>

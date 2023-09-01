@@ -1,106 +1,25 @@
-.wrapper {
-  height: 100%;
-  width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  position: absolute;
-  background: linear-gradient(
-    124deg,
-    #ff2400,
-    #e81d1d,
-    #e8b71d,
-    #e3e81d,
-    #1de840,
-    #1ddde8,
-    #2b1de8,
-    #dd00f3,
-    #dd00f3
-  );
-  background-size: 1800% 1800%;
-  -webkit-animation: rainbow 3s ease infinite;
-  -z-animation: rainbow 3s ease infinite;
-  -o-animation: rainbow 3s ease infinite;
-  animation: rainbow 3s ease infinite;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+html {
+  min-height:100%;
+  background:
+   linear-gradient(rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%)
+   0 0/100% 200%;
+   animation: a 2s linear infinite;
 }
-.vertical {
-  animation-delay: 1s;
-  opacity: 0;
+
+@keyframes a {
+  to {background-position:0 -200%}
+}
+
+.wrapper {
   animation: fadein 3s ease forwards;
-  -ms-writing-mode: tb-rl;
-  writing-mode: vertical-rl;
-  font-size: 8vh;
-  display: inline-block;
-  position: relative;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: "Rampart One", cursive;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 99%;
 }
 
 @keyframes fadein {
   100% {
     opacity: 1;
-  }
-}
-
-@-webkit-keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-
-  50% {
-    background-position: 100% 19%;
-  }
-
-  100% {
-    background-position: 0% 82%;
-  }
-}
-
-@-moz-keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-
-  50% {
-    background-position: 100% 19%;
-  }
-
-  100% {
-    background-position: 0% 82%;
-  }
-}
-
-@-o-keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-
-  50% {
-    background-position: 100% 19%;
-  }
-
-  100% {
-    background-position: 0% 82%;
-  }
-}
-
-@keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-
-  50% {
-    background-position: 100% 19%;
-  }
-
-  100% {
-    background-position: 0% 82%;
   }
 }
