@@ -2,12 +2,12 @@
   "$schema": "https://tkytel.github.io/mantela/0.1/mantela.schema.json",
   "version": "0.1.0",
   "aboutMe": {
-    "identifier": "f040d6dc701921a93af2c8427aa9e9b9",
     "name": "eggplants",
     "preferredPrefix": [
       "810",
       "0810"
     ],
+    "identifier": "f040d6dc701921a93af2c8427aa9e9b9",
     "sipUsername": "SIP-TRUNK-8C3A5E27",
     "sipPassword": "ODVPY2VGWXE5VGc9",
     "sipServer": "100.74.153.30",
@@ -23,15 +23,28 @@
     {
       "name": "welcome",
       "extension": "1234",
-      "type": "information",
-      "identifier": "MQS5ZWOV"
+      "identifier": "MQS5ZWOV",
+      "type": "information"
     },
     {
       "name": "oppo",
       "extension": "200",
-      "type": "phone",
-      "identifier": "Q4G9XCJ4"
+      "identifier": "Q4G9XCJ4",
+      "type": "phone"
     }
   ],
-  "providers": []
+  "providers": [
+    {
+      "name": "mknetel",
+      "prefix": "510",
+      "identifier": "93b2d256-39c1-4053-bda1-c0643dd40690",
+      "mantela": "https://unstable.kusaremkn.com/.well-known/mantela.json"
+    },
+    {
+      "name": "kimkim0106",
+      "prefix": "106",
+      "identifier": "8b741e2b-45f9-4187-9da1-05d866b79a09",
+      "mantela": "https://kimkim0106.net/.well-known/mantela.json"
+    }
+  ]
 }
