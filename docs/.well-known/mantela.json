@@ -21,7 +21,7 @@
     "sipUri": [
       "sip:100.74.153.30:5060;transport=udp",
       "sip:100.74.153.30:5060;transport=tcp"
-		],
+    ],
     "unavailable": false,
     "image": "https://github.com/eggplants.png"
   },
