@@ -15,38 +15,35 @@
       "810",
       "0810"
     ],
-    "sipPassword": "ODVPY2VGWXE5VGc9",
-    "sipServer": "100.74.153.30",
     "sipUri": [
-      "sip:100.74.153.30:5060;transport=udp",
-      "sip:100.74.153.30:5060;transport=tcp"
+      "sip:SIP-TRUNK-8C3A5E27:ODVPY2VGWXE5VGc9@100.74.153.30:5060;transport=udp",
+      "sip:SIP-TRUNK-8C3A5E27:ODVPY2VGWXE5VGc9@100.74.153.30:5060;transport=tcp"
     ],
-    "sipUsername": "SIP-TRUNK-8C3A5E27",
     "unavailable": false
   },
   "extensions": [
     {
       "extension": "1234",
       "identifier": "MQS5ZWOV",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Aoshima_Yobikomi-kun_Mini_and_Gunmadenki_Yobikomi-kun_MC-F06.jpg",
       "name": "Welcome",
-      "type": "information",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Aoshima_Yobikomi-kun_Mini_and_Gunmadenki_Yobikomi-kun_MC-F06.jpg"
+      "type": "information"
     },
     {
       "extension": "200",
       "identifier": "Q4G9XCJ4",
-      "name": "Mobile",
-      "type": "smartphone",
+      "image": "https://img1.kakaku.k-img.com/images/productimage/fullscale/J0000045130.jpg",
       "model": "motorola edge 50 pro",
-      "image": "https://img1.kakaku.k-img.com/images/productimage/fullscale/J0000045130.jpg"
+      "name": "Mobile",
+      "type": "smartphone"
     },
     {
       "extension": "300",
       "identifier": "RFEX3V77",
+      "image": "https://apac.alcatel-business.com/sites/default/files/product/Alcatel-phone-T22-base-black-front.png",
       "model": "Alcatel T22",
       "name": "Alcatel",
-      "type": "phone",
-      "image": "https://apac.alcatel-business.com/sites/default/files/product/Alcatel-phone-T22-base-black-front.png"
+      "type": "phone"
     }
   ],
   "providers": [
