@@ -9,6 +9,7 @@
   <meta name="author" content="egpl0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#5d2a72">
+  <meta name="color-scheme" content="light dark">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:creator" content="@egpl0">
   <meta name="twitter:site" content="@egpl0">
@@ -22,7 +23,14 @@
   <link rel="pgpkey" href="https://keys.openpgp.org/vks/v1/by-fingerprint/EE3A8EF380B4EC6F5590E3F1E645D09ED439FB0E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+  <!-- web fonts swap in without blocking the first paint; DotGothic16 is only
+       used for the h1/h2s, so it is subset to their glyphs via &text= (keep in sync) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap&text=eggplants%20リンク%20Links%20プロジェクト%20Projects%20活動量の推移%20Activity%20over%20the%20years%20GitHub%20Pages%20鍵%20Key" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap&text=eggplants%20リンク%20Links%20プロジェクト%20Projects%20活動量の推移%20Activity%20over%20the%20years%20GitHub%20Pages%20鍵%20Key">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap">
+  </noscript>
   <link rel="stylesheet" href="css/index.css">
   <script>
     (function () {
@@ -33,6 +41,7 @@
       try {
         var t = localStorage.getItem("theme");
         if (t === "light" || t === "dark" || t === "rainbow") document.documentElement.dataset.theme = t;
+        if (t === "light" || t === "dark") document.querySelector('meta[name="color-scheme"]').content = t;
       } catch (e) {}
     })();
   </script>
@@ -43,7 +52,7 @@
   <div class="wrap">
 
     <header class="masthead">
-      <div class="prefs" hidden>
+      <div class="prefs">
         <div class="seg lang" role="group" aria-label="Language">
           <button type="button" data-set-lang="ja" lang="ja">日本語</button>
           <button type="button" data-set-lang="en" lang="en">English</button>
@@ -79,136 +88,140 @@ t1t1ii1itL0888L
       </nav>
     </header>
 
-    <section id="links">
-      <div class="sec-head">
-        <h2><span data-lang="ja">リンク</span><span data-lang="en">Links</span></h2>
-      </div>
-      <ul class="links">
-        <li><a href="https://github.com/eggplants"><b>GitHub</b><span>@eggplants</span></a></li>
-        <li><a href="https://pypi.org/user/eggplants/"><b>PyPI</b><span>eggplants</span></a></li>
-        <li><a href="https://gist.github.com/eggplants"><b>Gist</b><span>eggplants</span></a></li>
-        <li><a href="https://greasyfork.org/en/users/671442-eggplants"><b>Greasy Fork</b><span>eggplants</span></a></li>
-        <li><a href="https://misskey.io/@egp" rel="me"><b>Misskey</b><span>@egp@misskey.io</span></a></li>
-        <li><a href="https://twitter.com/egpl0" rel="me"><b>X</b><span>@egpl0</span></a></li>
-        <li><a href="https://gitlab.com/eggplants_"><b>GitLab</b><span>@eggplants_</span></a></li>
-        <li><a href="https://opencollective.com/eggplants"><b>Open Collective</b><span>eggplants</span></a></li>
-        <li><a href="https://key.egpl.dev"><b>Keyoxide</b><span>key.egpl.dev</span></a></li>
-        <li><a href="https://github.com/pulls?q=is%3Apr+author%3Aeggplants+archived%3Afalse+is%3Aclosed+is%3Apublic+-user%3Aeggplants"><b>Pulls</b><span><span data-lang="ja">外部への PR</span><span data-lang="en">external PRs</span></span></a></li>
-        <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+author%3Aeggplants+archived%3Afalse"><b>Issues</b><span><span data-lang="ja">外部への Issue</span><span data-lang="en">external issues</span></span></a></li>
-      </ul>
-    </section>
+    <main>
 
-    <section id="projects">
-      <div class="sec-head">
-        <h2><span data-lang="ja">プロジェクト</span><span data-lang="en">Projects</span></h2>
-      </div>
-      <div class="filters">
-        <div class="frow" role="group" id="filter-lang" data-aria-ja="言語で絞り込み" data-aria-en="Filter by language"><span class="flabel"><span data-lang="ja">言語</span><span data-lang="en">Language</span></span></div>
-        <div class="frow" role="group" id="filter-tag" data-aria-ja="タグで絞り込み" data-aria-en="Filter by tag"><span class="flabel"><span data-lang="ja">タグ</span><span data-lang="en">Tag</span></span></div>
-        <p class="note" id="projects-count" aria-live="polite"></p>
-      </div>
-      <ul class="projects" id="projects-list"></ul>
-    </section>
-
-    <section id="activity">
-      <div class="sec-head">
-        <h2><span data-lang="ja">活動量の推移</span><span data-lang="en">Activity over the years</span></h2>
-      </div>
-      <div class="ygrid bars" id="bars-grid"></div>
-    </section>
-
-    <section id="pages">
-      <div class="sec-head">
-        <h2>GitHub Pages</h2>
-      </div>
-      <ul class="pages">
-        <li><a href="https://egpl.dev/afxdl">afxdl</a></li>
-        <li><a href="https://egpl.dev/anal">anal</a></li>
-        <li><a href="https://egpl.dev/cfts-solver">cfts-solver</a></li>
-        <li><a href="https://egpl.dev/cookiecutter-python">cookiecutter-python</a></li>
-        <li><a href="https://egpl.dev/deepl-cli">deepl-cli</a></li>
-        <li><a href="https://egpl.dev/dojinvoice_db">dojinvoice_db</a></li>
-        <li><a href="https://egpl.dev/edcb-bridge">edcb-bridge</a></li>
-        <li><a href="https://egpl.dev/eijiro-to-sqlite">eijiro-to-sqlite</a></li>
-        <li><a href="https://egpl.dev/gemini">gemini</a></li>
-        <li><a href="https://egpl.dev/get-pixivpy-token">get-pixivpy-token</a></li>
-        <li><a href="https://egpl.dev/getjmanga">getjmanga</a></li>
-        <li><a href="https://egpl.dev/ghcr-badge">ghcr-badge</a></li>
-        <li><a href="https://egpl.dev/ghitter">ghitter</a></li>
-        <li><a href="https://egpl.dev/godlo">godlo</a></li>
-        <li><a href="https://egpl.dev/gw2aws">gw2aws</a></li>
-        <li><a href="https://egpl.dev/install-playwright-python">install-playwright-python</a></li>
-        <li><a href="https://egpl.dev/jason-json">jason-json</a></li>
-        <li><a href="https://egpl.dev/kdg-list">kdg-list</a></li>
-        <li><a href="https://egpl.dev/locloc">locloc</a></li>
-        <li><a href="https://egpl.dev/mb/autoinstall.yaml">mb/autoinstall.yaml</a></li>
-        <li><a href="https://egpl.dev/mb/bootstrap.ps1">mb/bootstrap.ps1</a></li>
-        <li><a href="https://egpl.dev/mb/bootstrap.sh">mb/bootstrap.sh</a></li>
-        <li><a href="https://egpl.dev/michikusa-works-checker">michikusa-works-checker</a></li>
-        <li><a href="https://egpl.dev/michixa">michixa</a></li>
-        <li><a href="https://egpl.dev/otpa">otpa</a></li>
-        <li><a href="https://egpl.dev/pixiv-bulk-downloader">pixiv-bulk-downloader</a></li>
-        <li><a href="https://egpl.dev/pyjlyric">pyjlyric</a></li>
-        <li><a href="https://egpl.dev/pyproject-fmt-py">pyproject-fmt-py</a></li>
-        <li><a href="https://egpl.dev/rqw">rqw</a></li>
-        <li><a href="https://egpl.dev/saizeriya">saizeriya</a></li>
-        <li><a href="https://egpl.dev/sb2n">sb2n</a></li>
-        <li><a href="https://egpl.dev/scrapbox-client">scrapbox-client</a></li>
-        <li><a href="https://egpl.dev/shindan-cli">shindan-cli</a></li>
-        <li><a href="https://egpl.dev/subt">subt</a></li>
-        <li><a href="https://egpl.dev/textpad">textpad</a></li>
-        <li><a href="https://egpl.dev/unicode-map">unicode-map</a></li>
-        <li><a href="https://egpl.dev/wafsolver">wafsolver</a></li>
-        <li><a href="https://egpl.dev/zutool">zutool</a></li>
-      </ul>
-      <details class="more">
-        <summary>Archived Repo pages</summary>
-        <ul class="pages">
-          <li><a href="https://egpl.dev/ads">ads</a></li>
-          <li><a href="https://egpl.dev/aegi">aegi</a></li>
-          <li><a href="https://egpl.dev/chobit-endless">chobit-endless</a></li>
-          <li><a href="https://egpl.dev/contributter-ranking-bot">contributter-ranking-bot</a></li>
-          <li><a href="https://egpl.dev/eng_vocab">eng_vocab</a></li>
-          <li><a href="https://egpl.dev/fushin/fushin.html">fushin/fushin.html</a></li>
-          <li><a href="https://egpl.dev/fushin_dialogue">fushin_dialogue</a></li>
-          <li><a href="https://egpl.dev/getcomici">getcomici</a></li>
-          <li><a href="https://egpl.dev/getjump">getjump</a></li>
-          <li><a href="https://egpl.dev/getpiccoma">getpiccoma</a></li>
-          <li><a href="https://egpl.dev/gettake">gettake</a></li>
-          <li><a href="https://egpl.dev/infosearch">infosearch</a></li>
-          <li><a href="https://egpl.dev/jma-api-doc">jma-api-doc</a></li>
-          <li><a href="https://egpl.dev/kdb-tabulator">kdb-tabulator</a></li>
-          <li><a href="https://egpl.dev/leap-day-correct-anchored">leap-day-correct-anchored</a></li>
-          <li><a href="https://egpl.dev/ls-dlp">ls-dlp</a></li>
-          <li><a href="https://egpl.dev/my-best-python-project">my-best-python-project</a></li>
-          <li><a href="https://egpl.dev/nowlibcraw">nowlibcraw</a></li>
-          <li><a href="https://egpl.dev/pimg">pimg</a></li>
-          <li><a href="https://egpl.dev/practice_webpage">practice_webpage</a></li>
-          <li><a href="https://egpl.dev/py3-gnupg">py3-gnupg</a></li>
-          <li><a href="https://egpl.dev/receipts">receipts</a></li>
-          <li><a href="https://egpl.dev/scheme-mirror">scheme-mirror</a></li>
-          <li><a href="https://egpl.dev/setup-ubuntu.sh/autoinstall.yaml">setup-ubuntu.sh/autoinstall.yaml</a></li>
-          <li><a href="https://egpl.dev/wiredify">wiredify</a></li>
-          <li><a href="https://egpl.dev/xyz2png">xyz2png</a></li>
-          <li><a href="https://egpl.dev/y2m">y2m</a></li>
-          <li><a href="https://egpl.dev/zengaku_mypage">zengaku_mypage</a></li>
+      <section id="links">
+        <div class="sec-head">
+          <h2><span data-lang="ja">リンク</span><span data-lang="en">Links</span></h2>
+        </div>
+        <ul class="links">
+          <li><a href="https://github.com/eggplants"><b>GitHub</b><span>@eggplants</span></a></li>
+          <li><a href="https://pypi.org/user/eggplants/"><b>PyPI</b><span>eggplants</span></a></li>
+          <li><a href="https://gist.github.com/eggplants"><b>Gist</b><span>eggplants</span></a></li>
+          <li><a href="https://greasyfork.org/en/users/671442-eggplants"><b>Greasy Fork</b><span>eggplants</span></a></li>
+          <li><a href="https://misskey.io/@egp" rel="me"><b>Misskey</b><span>@egp@misskey.io</span></a></li>
+          <li><a href="https://twitter.com/egpl0" rel="me"><b>X</b><span>@egpl0</span></a></li>
+          <li><a href="https://gitlab.com/eggplants_"><b>GitLab</b><span>@eggplants_</span></a></li>
+          <li><a href="https://opencollective.com/eggplants"><b>Open Collective</b><span>eggplants</span></a></li>
+          <li><a href="https://key.egpl.dev"><b>Keyoxide</b><span>key.egpl.dev</span></a></li>
+          <li><a href="https://github.com/pulls?q=is%3Apr+author%3Aeggplants+archived%3Afalse+is%3Aclosed+is%3Apublic+-user%3Aeggplants"><b>Pulls</b><span><span data-lang="ja">外部への PR</span><span data-lang="en">external PRs</span></span></a></li>
+          <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+author%3Aeggplants+archived%3Afalse"><b>Issues</b><span><span data-lang="ja">外部への Issue</span><span data-lang="en">external issues</span></span></a></li>
         </ul>
-      </details>
-    </section>
+      </section>
 
-    <section id="key">
-      <div class="sec-head">
-        <h2><span data-lang="ja">鍵</span><span data-lang="en">Key</span></h2>
-        <p data-lang="ja">OpenPGP の公開鍵と、各サービスのアカウントが同一人物であることの証明は <a href="https://key.egpl.dev">key.egpl.dev</a> で確認できます。</p>
-        <p data-lang="en">My OpenPGP public key and proofs that these accounts are mine are on <a href="https://key.egpl.dev">key.egpl.dev</a>.</p>
-      </div>
-      <p class="fpr"><code>EE3A 8EF3 80B4 EC6F 5590 E3F1 E645 D09E D439 FB0E</code></p>
-      <p class="note"><code>dig txt egpl.dev +short | tr \$ \\n</code></p>
-    </section>
+      <section id="projects">
+        <div class="sec-head">
+          <h2><span data-lang="ja">プロジェクト</span><span data-lang="en">Projects</span></h2>
+        </div>
+        <div class="filters">
+          <div class="frow" role="group" id="filter-lang" data-aria-ja="言語で絞り込み" data-aria-en="Filter by language"><span class="flabel"><span data-lang="ja">言語</span><span data-lang="en">Language</span></span></div>
+          <div class="frow" role="group" id="filter-tag" data-aria-ja="タグで絞り込み" data-aria-en="Filter by tag"><span class="flabel"><span data-lang="ja">タグ</span><span data-lang="en">Tag</span></span></div>
+          <p class="note" id="projects-count" aria-live="polite"></p>
+        </div>
+        <ul class="projects" id="projects-list"></ul>
+      </section>
+
+      <section id="activity">
+        <div class="sec-head">
+          <h2><span data-lang="ja">活動量の推移</span><span data-lang="en">Activity over the years</span></h2>
+        </div>
+        <div class="ygrid bars" id="bars-grid"></div>
+      </section>
+
+      <section id="pages">
+        <div class="sec-head">
+          <h2>GitHub Pages</h2>
+        </div>
+        <ul class="pages">
+          <li><a href="https://egpl.dev/afxdl">afxdl</a></li>
+          <li><a href="https://egpl.dev/anal">anal</a></li>
+          <li><a href="https://egpl.dev/cfts-solver">cfts-solver</a></li>
+          <li><a href="https://egpl.dev/cookiecutter-python">cookiecutter-python</a></li>
+          <li><a href="https://egpl.dev/deepl-cli">deepl-cli</a></li>
+          <li><a href="https://egpl.dev/dojinvoice_db">dojinvoice_db</a></li>
+          <li><a href="https://egpl.dev/edcb-bridge">edcb-bridge</a></li>
+          <li><a href="https://egpl.dev/eijiro-to-sqlite">eijiro-to-sqlite</a></li>
+          <li><a href="https://egpl.dev/gemini">gemini</a></li>
+          <li><a href="https://egpl.dev/get-pixivpy-token">get-pixivpy-token</a></li>
+          <li><a href="https://egpl.dev/getjmanga">getjmanga</a></li>
+          <li><a href="https://egpl.dev/ghcr-badge">ghcr-badge</a></li>
+          <li><a href="https://egpl.dev/ghitter">ghitter</a></li>
+          <li><a href="https://egpl.dev/godlo">godlo</a></li>
+          <li><a href="https://egpl.dev/gw2aws">gw2aws</a></li>
+          <li><a href="https://egpl.dev/install-playwright-python">install-playwright-python</a></li>
+          <li><a href="https://egpl.dev/jason-json">jason-json</a></li>
+          <li><a href="https://egpl.dev/kdg-list">kdg-list</a></li>
+          <li><a href="https://egpl.dev/locloc">locloc</a></li>
+          <li><a href="https://egpl.dev/mb/autoinstall.yaml">mb/autoinstall.yaml</a></li>
+          <li><a href="https://egpl.dev/mb/bootstrap.ps1">mb/bootstrap.ps1</a></li>
+          <li><a href="https://egpl.dev/mb/bootstrap.sh">mb/bootstrap.sh</a></li>
+          <li><a href="https://egpl.dev/michikusa-works-checker">michikusa-works-checker</a></li>
+          <li><a href="https://egpl.dev/michixa">michixa</a></li>
+          <li><a href="https://egpl.dev/otpa">otpa</a></li>
+          <li><a href="https://egpl.dev/pixiv-bulk-downloader">pixiv-bulk-downloader</a></li>
+          <li><a href="https://egpl.dev/pyjlyric">pyjlyric</a></li>
+          <li><a href="https://egpl.dev/pyproject-fmt-py">pyproject-fmt-py</a></li>
+          <li><a href="https://egpl.dev/rqw">rqw</a></li>
+          <li><a href="https://egpl.dev/saizeriya">saizeriya</a></li>
+          <li><a href="https://egpl.dev/sb2n">sb2n</a></li>
+          <li><a href="https://egpl.dev/scrapbox-client">scrapbox-client</a></li>
+          <li><a href="https://egpl.dev/shindan-cli">shindan-cli</a></li>
+          <li><a href="https://egpl.dev/subt">subt</a></li>
+          <li><a href="https://egpl.dev/textpad">textpad</a></li>
+          <li><a href="https://egpl.dev/unicode-map">unicode-map</a></li>
+          <li><a href="https://egpl.dev/wafsolver">wafsolver</a></li>
+          <li><a href="https://egpl.dev/zutool">zutool</a></li>
+        </ul>
+        <details class="more">
+          <summary>Archived Repo pages</summary>
+          <ul class="pages">
+            <li><a href="https://egpl.dev/ads">ads</a></li>
+            <li><a href="https://egpl.dev/aegi">aegi</a></li>
+            <li><a href="https://egpl.dev/chobit-endless">chobit-endless</a></li>
+            <li><a href="https://egpl.dev/contributter-ranking-bot">contributter-ranking-bot</a></li>
+            <li><a href="https://egpl.dev/eng_vocab">eng_vocab</a></li>
+            <li><a href="https://egpl.dev/fushin/fushin.html">fushin/fushin.html</a></li>
+            <li><a href="https://egpl.dev/fushin_dialogue">fushin_dialogue</a></li>
+            <li><a href="https://egpl.dev/getcomici">getcomici</a></li>
+            <li><a href="https://egpl.dev/getjump">getjump</a></li>
+            <li><a href="https://egpl.dev/getpiccoma">getpiccoma</a></li>
+            <li><a href="https://egpl.dev/gettake">gettake</a></li>
+            <li><a href="https://egpl.dev/infosearch">infosearch</a></li>
+            <li><a href="https://egpl.dev/jma-api-doc">jma-api-doc</a></li>
+            <li><a href="https://egpl.dev/kdb-tabulator">kdb-tabulator</a></li>
+            <li><a href="https://egpl.dev/leap-day-correct-anchored">leap-day-correct-anchored</a></li>
+            <li><a href="https://egpl.dev/ls-dlp">ls-dlp</a></li>
+            <li><a href="https://egpl.dev/my-best-python-project">my-best-python-project</a></li>
+            <li><a href="https://egpl.dev/nowlibcraw">nowlibcraw</a></li>
+            <li><a href="https://egpl.dev/pimg">pimg</a></li>
+            <li><a href="https://egpl.dev/practice_webpage">practice_webpage</a></li>
+            <li><a href="https://egpl.dev/py3-gnupg">py3-gnupg</a></li>
+            <li><a href="https://egpl.dev/receipts">receipts</a></li>
+            <li><a href="https://egpl.dev/scheme-mirror">scheme-mirror</a></li>
+            <li><a href="https://egpl.dev/setup-ubuntu.sh/autoinstall.yaml">setup-ubuntu.sh/autoinstall.yaml</a></li>
+            <li><a href="https://egpl.dev/wiredify">wiredify</a></li>
+            <li><a href="https://egpl.dev/xyz2png">xyz2png</a></li>
+            <li><a href="https://egpl.dev/y2m">y2m</a></li>
+            <li><a href="https://egpl.dev/zengaku_mypage">zengaku_mypage</a></li>
+          </ul>
+        </details>
+      </section>
+
+      <section id="key">
+        <div class="sec-head">
+          <h2><span data-lang="ja">鍵</span><span data-lang="en">Key</span></h2>
+          <p data-lang="ja">OpenPGP の公開鍵と、各サービスのアカウントが同一人物であることの証明は <a href="https://key.egpl.dev">key.egpl.dev</a> で確認できます。</p>
+          <p data-lang="en">My OpenPGP public key and proofs that these accounts are mine are on <a href="https://key.egpl.dev">key.egpl.dev</a>.</p>
+        </div>
+        <p class="fpr"><code>EE3A 8EF3 80B4 EC6F 5590 E3F1 E645 D09E D439 FB0E</code></p>
+        <p class="note"><code>dig txt egpl.dev +short | tr \$ \\n</code></p>
+      </section>
+
+    </main>
 
     <footer class="footer">
       <a class="river" href="https://twitter.com/seitaiebi/status/1697149799974224147" aria-label="🎶">
-        <span class="river-track"><img src="img/o-0.png" alt="" width="424" height="302"><img src="img/o-1.png" alt="" width="424" height="302"></span>
+        <span class="river-track"><img src="img/o-0.webp" alt="" width="337" height="240" loading="lazy"><img src="img/o-1.webp" alt="" width="337" height="240" loading="lazy"></span>
       </a>
       <p class="note">© eggplants</p>
     </footer>

@@ -202,6 +202,8 @@
   const setTheme = (theme) => {
     if (theme === "system") delete document.documentElement.dataset.theme;
     else document.documentElement.dataset.theme = theme;
+    // keep the meta in step with data-theme; rainbow follows the system scheme
+    document.querySelector('meta[name="color-scheme"]').content = theme === "light" || theme === "dark" ? theme : "light dark";
     document.querySelectorAll("[data-set-theme]").forEach((btn) => {
       btn.setAttribute("aria-pressed", String(btn.dataset.setTheme === theme));
     });
@@ -209,7 +211,6 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const prefs = document.querySelector(".prefs");
-    prefs.hidden = false;
     prefs.addEventListener("click", (ev) => {
       const btn = ev.target.closest("[data-set-lang], [data-set-theme]");
       if (!btn) return;
@@ -224,6 +225,11 @@
     });
     setLang(document.documentElement.lang === "en" ? "en" : "ja");
     setTheme(document.documentElement.dataset.theme || "system");
+    // keep other open tabs in sync
+    window.addEventListener("storage", (ev) => {
+      if (ev.key === "lang" && (ev.newValue === "ja" || ev.newValue === "en")) setLang(ev.newValue);
+      else if (ev.key === "theme" || ev.key === null) setTheme(["light", "dark", "rainbow"].includes(ev.newValue) ? ev.newValue : "system");
+    });
 
     document.querySelectorAll(".river").forEach(river);
     projects();
