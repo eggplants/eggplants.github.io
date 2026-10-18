@@ -78,6 +78,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 /* masthead */
 .masthead { position: relative; padding-top: 56px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px 36px; align-items: center; }
 .masthead .toc { grid-column: 1 / -1; }
+.aa-fig { margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .aa { margin: 0; font-family: var(--font-mono); font-size: 0.62rem; line-height: 1.15; color: var(--calyx); }
 .intro { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .masthead h1 { font-family: var(--font-display); font-weight: 400; font-size: var(--step-3); letter-spacing: 0.02em; }
