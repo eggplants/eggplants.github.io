@@ -10,12 +10,12 @@
 
   const YEARS = ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
   const BARS = [
-    [["新規の自作リポジトリ", "New repos"], ["fork を除く", "excluding forks"], [1, 15, 35, 66, 31, 14, 10, 6, 23]],
+    [["新規の自作リポジトリ", "New repos"], ["fork を除く", "excluding forks"], [1, 15, 35, 66, 30, 14, 10, 6, 23]],
     [["外部への PR", "PRs to other repos"], null, [0, 12, 43, 148, 151, 39, 31, 107, 24]],
     [["外部への Issue", "Issues to other repos"], null, [0, 4, 86, 101, 126, 46, 54, 126, 59]],
     [["PyPI の新規パッケージ", "New PyPI packages"], null, [0, 0, 4, 12, 16, 7, 5, 1, 13]],
     [["公開 gist", "Public gists"], null, [0, 85, 93, 116, 33, 12, 39, 11, 18]],
-    [["公開 commit", "Public commits"], null, [11, 317, 1023, 1960, 1635, 1260, 1316, 982, 1404]],
+    [["公開 commit", "Public commits"], null, [11, 317, 1023, 1960, 1635, 1260, 1316, 982, 1414]],
   ];
 
   // [name, language, tags, [ja, en], repo (default: eggplants/<name>)]
@@ -102,7 +102,7 @@
     YEARS.forEach((y, i) => {
       const partial = i === YEARS.length - 1;
       const d = el("div", "yhead" + (partial ? " partial" : ""), "’" + y.slice(2));
-      if (partial) d.title = "– 2026-10-17";
+      if (partial) d.title = "– 2026-10-19";
       h.appendChild(d);
     });
     grid.appendChild(h);
