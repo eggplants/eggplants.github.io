@@ -198,6 +198,21 @@
     });
   };
 
+  // rainbow: turn --hue once per HUE_PERIOD while the rainbow theme is on
+  const HUE_PERIOD = 1500; // ms
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  let hueFrame = 0;
+  const spinHue = (now) => {
+    document.documentElement.style.setProperty("--hue", ((now / HUE_PERIOD) * 360) % 360 + "deg");
+    hueFrame = requestAnimationFrame(spinHue);
+  };
+  const syncHue = () => {
+    cancelAnimationFrame(hueFrame);
+    document.documentElement.style.removeProperty("--hue");
+    hueFrame = document.documentElement.dataset.theme === "rainbow" && !reduceMotion.matches ? requestAnimationFrame(spinHue) : 0;
+  };
+  reduceMotion.addEventListener("change", syncHue);
+
   // the initial theme is set by the inline script in <head>; "system" = no data-theme
   const setTheme = (theme) => {
     if (theme === "system") delete document.documentElement.dataset.theme;
@@ -207,6 +222,7 @@
     document.querySelectorAll("[data-set-theme]").forEach((btn) => {
       btn.setAttribute("aria-pressed", String(btn.dataset.setTheme === theme));
     });
+    syncHue();
   };
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -232,12 +248,15 @@
     });
 
     document.querySelectorAll(".river").forEach(river);
+    // per-card hue offset in the rainbow theme
+    document.querySelectorAll(".links li").forEach((li, i) => li.style.setProperty("--i", i));
     projects();
 
     const b = document.getElementById("bars-grid");
     yearHeader(b);
-    BARS.forEach(([name, sub, values]) => {
+    BARS.forEach(([name, sub, values], row) => {
       const lab = i18n(el("div", "label"), name);
+      lab.style.setProperty("--i", row); // per-row hue offset in the rainbow theme
       if (sub) lab.appendChild(i18n(el("small"), sub));
       b.appendChild(lab);
       const cols = el("div", "ycols");

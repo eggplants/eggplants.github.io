@@ -23,14 +23,15 @@
 :root[data-theme="dark"] { color-scheme: dark; }
 
 /* rainbow: every accent cycles through the hue wheel */
+/* --hue is spun from js/index.js, not a CSS animation: Chrome paints :visited
+   links with --ink when their color depends on an animated custom property */
 @property --hue { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
-@keyframes hue { to { --hue: 360deg; } }
 :root[data-theme="rainbow"] {
   --l: 0.55; /* lightness of the rainbow inks; rainbow follows the system scheme */
   --accent: oklch(0.5 0.2 var(--hue));
   --accent-soft: oklch(0.95 0.04 var(--hue));
   --calyx: oklch(0.52 0.16 calc(var(--hue) + 120deg));
-  animation: hue 1.5s linear infinite;
+  --rainbow: linear-gradient(90deg, oklch(var(--l) 0.2 var(--hue)), oklch(var(--l) 0.2 calc(var(--hue) + 120deg)), oklch(var(--l) 0.2 calc(var(--hue) + 240deg)));
 }
 @media (prefers-color-scheme: dark) {
   :root[data-theme="rainbow"] {
@@ -40,12 +41,22 @@
     --calyx: oklch(0.8 0.15 calc(var(--hue) + 120deg));
   }
 }
-:root[data-theme="rainbow"] .masthead h1 .handle {
-  background: linear-gradient(90deg, oklch(var(--l) 0.2 var(--hue)), oklch(var(--l) 0.2 calc(var(--hue) + 120deg)), oklch(var(--l) 0.2 calc(var(--hue) + 240deg)));
+:root[data-theme="rainbow"] :is(.masthead h1 .handle, .sec-head h2) {
+  background: var(--rainbow);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+:root[data-theme="rainbow"] .sec-head h2 { width: fit-content; }
+/* the second layer keeps the box's surface behind the clipped text */
+:root[data-theme="rainbow"] .fpr code {
+  background-image: var(--rainbow), linear-gradient(var(--surface), var(--surface));
+  -webkit-background-clip: text, padding-box;
+  background-clip: text, padding-box;
+  color: transparent;
+}
+:root[data-theme="rainbow"] .links b { color: oklch(var(--l) 0.2 calc(var(--hue) + var(--i, 0) * 33deg)); }
+:root[data-theme="rainbow"] .bars .label { color: oklch(var(--l) 0.2 calc(var(--hue) + var(--i, 0) * 60deg)); }
 :root[data-theme="rainbow"] .bcell .b { background: oklch(var(--l) 0.17 calc(var(--hue) + var(--i, 0) * 40deg)); }
 :root[data-theme="rainbow"] .river-track img { filter: sepia(1) saturate(4) hue-rotate(var(--hue)); }
 
@@ -173,5 +184,5 @@ section { display: flex; flex-direction: column; gap: 22px; scroll-margin-top: 1
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .river.on .river-track, :root[data-theme="rainbow"] { animation: none; }
+  .river.on .river-track { animation: none; }
 }
