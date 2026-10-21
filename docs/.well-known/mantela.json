@@ -16,8 +16,8 @@
       "0810"
     ],
     "sipUri": [
-      "sip:SIP-TRUNK-8C3A5E27:ODVPY2VGWXE5VGc9@100.74.153.30:5060;transport=udp",
-      "sip:SIP-TRUNK-8C3A5E27:ODVPY2VGWXE5VGc9@100.74.153.30:5060;transport=tcp"
+      "sip:SIP-TRUNK-2577A8FE:ODVPY2VGWXE5VGc9@100.74.153.30:5060;transport=udp",
+      "sip:SIP-TRUNK-2577A8FE:ODVPY2VGWXE5VGc9@100.74.153.30:5060;transport=tcp"
     ],
     "unavailable": false
   },
