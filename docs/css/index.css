@@ -137,6 +137,11 @@ section { display: flex; flex-direction: column; gap: 22px; scroll-margin-top: 1
 .projects .plang::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; background: var(--dot, var(--muted)); }
 .projects p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; flex-grow: 1; }
 .projects .ptags { display: flex; flex-wrap: wrap; gap: 2px 10px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--calyx); }
+.projects .pfoot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.projects .pyears { margin-left: auto; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* archived projects are greyed out until hovered or focused */
+.projects li.archived { filter: grayscale(1); opacity: 0.6; transition: opacity 0.15s; }
+.projects li.archived:is(:hover, :focus-within) { opacity: 1; }
 
 /* year grid */
 .ygrid { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 4px 18px; align-items: center; }
