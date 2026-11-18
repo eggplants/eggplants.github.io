@@ -1,5 +1,8 @@
 # [`@eggplants`](https://github.com/eggplants)' GitHub Pages
 
+[![ci.yml](https://github.com/eggplants/eggplants.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/eggplants/eggplants.github.io/actions/workflows/ci.yml)
+[![update.yml](https://github.com/eggplants/eggplants.github.io/actions/workflows/update.yml/badge.svg)](https://github.com/eggplants/eggplants.github.io/actions/workflows/update.yml)
+
 - <https://egpl.dev/afxdl>
 - <https://egpl.dev/anal>
 - <https://egpl.dev/cfts-solver>
