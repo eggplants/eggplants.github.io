@@ -79,21 +79,20 @@ def per_year(dates: list[str], years: list[int]) -> list[int]:
 
 
 def search_and_commits(years: list[int]) -> tuple[list[int], list[int], list[int]]:
-    fields = []
+    prs, issues, commits = [], [], []
+    # one query per year: batching every year into one query times out (502/504)
     for y in years:
         q = f"author:{USER} -user:{USER} is:public created:{y}"
-        fields.append(f'pr{y}: search(query: "is:pr {q}", type: ISSUE, first: 0) {{ issueCount }}')
-        fields.append(f'issue{y}: search(query: "is:issue {q}", type: ISSUE, first: 0) {{ issueCount }}')
-        fields.append(
-            f'commit{y}: user(login: "{USER}") {{ contributionsCollection(from: "{y}-01-01T00:00:00Z", '
-            f'to: "{y}-12-31T23:59:59Z") {{ totalCommitContributions }} }}'
+        d = graphql(
+            f'{{ pr: search(query: "is:pr {q}", type: ISSUE, first: 0) {{ issueCount }}\n'
+            f'issue: search(query: "is:issue {q}", type: ISSUE, first: 0) {{ issueCount }}\n'
+            f'commit: user(login: "{USER}") {{ contributionsCollection(from: "{y}-01-01T00:00:00Z", '
+            f'to: "{y}-12-31T23:59:59Z") {{ totalCommitContributions }} }} }}'
         )
-    d = graphql("{" + "\n".join(fields) + "}")
-    return (
-        [d[f"pr{y}"]["issueCount"] for y in years],
-        [d[f"issue{y}"]["issueCount"] for y in years],
-        [d[f"commit{y}"]["contributionsCollection"]["totalCommitContributions"] for y in years],
-    )
+        prs.append(d["pr"]["issueCount"])
+        issues.append(d["issue"]["issueCount"])
+        commits.append(d["commit"]["contributionsCollection"]["totalCommitContributions"])
+    return prs, issues, commits
 
 
 def pypi_first_uploads() -> list[str]:
