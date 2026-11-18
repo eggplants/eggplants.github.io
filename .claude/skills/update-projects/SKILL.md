@@ -71,11 +71,12 @@ The Projects section of egpl.dev is rendered from two hand-maintained arrays in
    today.
 
 6. Verify:
-   - `node --check docs/js/index.js`
+   - `mise run pre-commit` (oxfmt, oxlint, knip, ruff, ty). Keep the
+     `// oxfmt-ignore` line above each array so entries stay one per line
    - `check.py` again: every section should be `(0)`, except entries the user
      chose to keep
-   - Optionally look at the page: `python3 -m http.server -d docs` and open the
-     Projects section; the status chip counts should match the list lengths.
+   - Optionally look at the page: `mise run serve` and open the Projects
+     section; the status chip counts should match the list lengths.
 
 7. Report what was added, moved and removed, with the tags and descriptions you
    chose so the user can correct them. Commit only when asked (`chore: update

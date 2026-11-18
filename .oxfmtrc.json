@@ -1,0 +1,7 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 120,
+  // HTML and CSS keep their hand-written compact style; scripts/update.py also
+  // rewrites parts of index.html and expects that layout
+  "ignorePatterns": ["docs/index.html", "docs/css/**", "pnpm-lock.yaml"]
+}
