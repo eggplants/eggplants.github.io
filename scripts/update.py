@@ -18,9 +18,14 @@ import urllib.request
 import xmlrpc.client
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
-from email.utils import parsedate_to_datetime
 from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
+from http import HTTPStatus
 from pathlib import Path
+from typing import TYPE_CHECKING, Any, cast
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 USER = "eggplants"
 FIRST_YEAR = 2018
@@ -50,7 +55,7 @@ def token() -> str:
 TOKEN = token()
 
 
-def request(url: str, data: dict | None = None, auth: bool = True) -> tuple[object, dict]:
+def request(url: str, data: dict | None = None, *, auth: bool = True) -> tuple[Any, dict]:
     headers = {"Accept": "application/vnd.github+json", "User-Agent": f"{USER}.github.io updater"}
     if auth and url.startswith("https://api.github.com/"):
         headers["Authorization"] = f"Bearer {TOKEN}"
@@ -59,13 +64,13 @@ def request(url: str, data: dict | None = None, auth: bool = True) -> tuple[obje
         return json.load(res), dict(res.headers)
 
 
-def rest(path: str, auth: bool = True) -> list[dict]:
+def rest(path: str, *, auth: bool = True) -> list[dict]:
     """GET a paginated list endpoint."""
     url: str | None = f"https://api.github.com{path}"
     items: list[dict] = []
     while url:
         page, headers = request(url, auth=auth)
-        items += page  # type: ignore[arg-type]
+        items += page
         m = re.search(r'<([^>]+)>; rel="next"', headers.get("Link", ""))
         url = m and m.group(1)
     return items
@@ -73,9 +78,9 @@ def rest(path: str, auth: bool = True) -> list[dict]:
 
 def graphql(query: str) -> dict:
     res, _ = request("https://api.github.com/graphql", {"query": query})
-    if res.get("errors"):  # type: ignore[union-attr]
-        sys.exit(f"GraphQL error: {res['errors']}")  # type: ignore[index]
-    return res["data"]  # type: ignore[index]
+    if res.get("errors"):
+        sys.exit(f"GraphQL error: {res['errors']}")
+    return res["data"]
 
 
 def per_year(dates: list[str], years: list[int]) -> list[int]:
@@ -102,23 +107,24 @@ def search_and_commits(years: list[int]) -> tuple[list[int], list[int], list[int
 
 def pypi_first_uploads() -> list[str]:
     # pypi.org/user/<name>/ sits behind a JS challenge, so use the XML-RPC API
-    names = [p for _, p in xmlrpc.client.ServerProxy("https://pypi.org/pypi").user_packages(USER)]
+    roles = cast("list[list[str]]", xmlrpc.client.ServerProxy("https://pypi.org/pypi").user_packages(USER))
+    names = [p for _, p in roles]
     firsts = []
     for name in sorted(set(names) - PYPI_EXCLUDE):
         try:
             d, _ = request(f"https://pypi.org/pypi/{name}/json")
         except urllib.error.HTTPError as e:
-            if e.code == 404:  # registered but nothing uploaded
+            if e.code == HTTPStatus.NOT_FOUND:  # registered but nothing uploaded
                 continue
             raise
-        uploads = [f["upload_time"] for files in d["releases"].values() for f in files]  # type: ignore[index]
+        uploads = [f["upload_time"] for files in d["releases"].values() for f in files]
         if uploads:
             firsts.append(min(uploads))
     return firsts
 
 
-def sub1(pattern: str, repl, s: str) -> str:
-    out, n = re.subn(pattern, repl, s, count=1, flags=re.S)
+def sub1(pattern: str, repl: Callable[[re.Match[str]], str], s: str) -> str:
+    out, n = re.subn(pattern, repl, s, count=1, flags=re.DOTALL)
     if n != 1:
         sys.exit(f"pattern not found: {pattern}")
     return out
@@ -138,7 +144,11 @@ def update_pages(repos: list[dict]) -> tuple[list[str], list[str]]:
     path = DOCS / "index.html"
     html = path.read_text()
     html = sub1(r'( *)<ul class="pages">.*?</ul>(?=\s*<details)', lambda m: ul(active, m.group(1)), html)
-    html = sub1(r'(?<=<summary>Archived Repo pages</summary>\n)( *)<ul class="pages">.*?</ul>', lambda m: ul(archived, m.group(1)), html)
+    html = sub1(
+        r'(?<=<summary>Archived Repo pages</summary>\n)( *)<ul class="pages">.*?</ul>',
+        lambda m: ul(archived, m.group(1)),
+        html,
+    )
     path.write_text(html)
     return active, archived
 
@@ -171,8 +181,11 @@ def update_sitemap(paths: list[str], today: str) -> None:
     urls = sorted(SITE + (p if "/" in p else p + "/") for p in paths if "/" not in p or p.endswith(".html"))
     with ThreadPoolExecutor(8) as ex:
         mods = list(ex.map(last_modified, urls))
-    entries = [f"  <url>\n    <loc>{SITE}</loc>\n    <priority>1.0</priority>\n    <lastmod>{today}T00:00:00+09:00</lastmod>\n  </url>\n"]
-    for url, mod in zip(urls, mods):
+    top = (
+        f"  <url>\n    <loc>{SITE}</loc>\n    <priority>1.0</priority>\n    <lastmod>{today}T00:00:00+09:00</lastmod>\n"
+    )
+    entries = [top + "  </url>\n"]
+    for url, mod in zip(urls, mods, strict=True):
         if mod is None:
             continue
         lastmod = f"    <lastmod>{mod}</lastmod>\n" if mod else ""
@@ -180,8 +193,7 @@ def update_sitemap(paths: list[str], today: str) -> None:
     (DOCS / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
-        '        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n'
-        + "".join(entries) + "</urlset>\n"
+        '        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n' + "".join(entries) + "</urlset>\n"
     )
 
 
@@ -206,10 +218,11 @@ def update_activity(repos: list[dict], today: str) -> None:
         print(f"{label}: {values}")
         js = sub1(
             rf'(\[\["[^"]*", "{re.escape(label)}"\], [^\n]*?, )\[[\d, ]*\]',
-            lambda m: m.group(1) + json.dumps(values),
+            lambda m, values=values: m.group(1) + json.dumps(values),
             js,
         )
-    js = sub1(r'(d\.title = "– )\d{4}-\d{2}-\d{2}', lambda m: m.group(1) + today, js)
+    # the en dash matches the date suffix of the bar tooltips in index.js
+    js = sub1(r'(d\.title = "– )\d{4}-\d{2}-\d{2}', lambda m: m.group(1) + today, js)  # noqa: RUF001
     path.write_text(js)
 
 

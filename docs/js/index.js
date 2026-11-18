@@ -8,7 +8,10 @@
     document.title = (t = rotate(t, 2)).join("");
   }, 500);
 
+  // YEARS and BARS are rewritten by scripts/update.py, one row per line
+  // oxfmt-ignore
   const YEARS = ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
+  // oxfmt-ignore
   const BARS = [
     [["新規の自作リポジトリ", "New repos"], ["fork を除く", "excluding forks"], [1, 15, 35, 66, 30, 14, 10, 5, 27]],
     [["外部への PR", "PRs to other repos"], null, [0, 12, 43, 148, 151, 39, 31, 107, 26]],
@@ -20,6 +23,8 @@
 
   // [name, language, tags, [ja, en], created year, repo (default: eggplants/<name>)]
   // non-archived eggplants repos pushed within a year (as of 2026-11-19), plus maintained external ones
+  // one entry per line, as .claude/skills/update-projects/check.py expects
+  // oxfmt-ignore
   const PROJECTS = [
     ["deepl-cli", "Python", ["cli", "lib", "scraping"], ["API キーなしで DeepL 翻訳を使える CLI", "DeepL Translator CLI that works without an API key"], 2020],
     ["get-pixivpy-token", "Python", ["cli"], ["pixivpy 用のトークン取得を自動化", "Gets your pixiv token for pixivpy"], 2021],
@@ -73,6 +78,7 @@
   ];
   // [name, language, tags, [ja, en], created year, archived year]
   // public non-fork archived eggplants repos (as of 2026-11-19), most recently archived first
+  // oxfmt-ignore
   const ARCHIVED = [
     ["getcomici", "Python", ["cli", "scraping"], ["コミチ+ 系の漫画配信サイトから画像を保存", "Saves images from manga sites built on Comici+"], 2026, 2026],
     ["getpiccoma", "Python", ["cli", "scraping"], ["ピッコマから画像を保存", "Saves images from Piccoma"], 2026, 2026],
@@ -237,6 +243,7 @@
     archived: ["アーカイブ", "Archived"],
     all: ["すべて", "All"],
   };
+  // oxfmt-ignore
   const LANG_COLORS = {
     Python: "#3572a5", TypeScript: "#3178c6", Go: "#00add8", Shell: "#89e051", Ruby: "#cc342d", Kotlin: "#a97bff",
     Svelte: "#ff3e00", HTML: "#e34c26", Dockerfile: "#384d54", Markdown: "#083fa1", YAML: "#cb171e",
@@ -310,7 +317,14 @@
       const d = el("p");
       d.append(i18n(el("span"), desc));
       const tg = el("div", "ptags");
-      tags.forEach((k) => tg.appendChild(i18n(el("span"), TAGS[k].map((x) => "#" + x))));
+      tags.forEach((k) =>
+        tg.appendChild(
+          i18n(
+            el("span"),
+            TAGS[k].map((x) => "#" + x),
+          ),
+        ),
+      );
       // created year – archived year; open-ended while active
       const span = (sep) => (until === since ? String(since) : since + sep + (until || ""));
       const foot = el("div", "pfoot");
@@ -334,7 +348,12 @@
         if (!it.li.hidden) n++;
       });
       count.replaceChildren();
-      i18n(count, n === scope.length ? [`全 ${n} 件`, `${n} projects`] : [`${scope.length} 件中 ${n} 件`, `${n} of ${scope.length}`]);
+      i18n(
+        count,
+        n === scope.length
+          ? [`全 ${n} 件`, `${n} projects`]
+          : [`${scope.length} 件中 ${n} 件`, `${n} of ${scope.length}`],
+      );
     };
     // values: [value, [ja, en]]; null = "All"
     const chips = (row, key, values, pool) => {
@@ -389,13 +408,16 @@
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let hueFrame = 0;
   const spinHue = (now) => {
-    document.documentElement.style.setProperty("--hue", ((now / HUE_PERIOD) * 360) % 360 + "deg");
+    document.documentElement.style.setProperty("--hue", (((now / HUE_PERIOD) * 360) % 360) + "deg");
     hueFrame = requestAnimationFrame(spinHue);
   };
   const syncHue = () => {
     cancelAnimationFrame(hueFrame);
     document.documentElement.style.removeProperty("--hue");
-    hueFrame = document.documentElement.dataset.theme === "rainbow" && !reduceMotion.matches ? requestAnimationFrame(spinHue) : 0;
+    hueFrame =
+      document.documentElement.dataset.theme === "rainbow" && !reduceMotion.matches
+        ? requestAnimationFrame(spinHue)
+        : 0;
   };
   reduceMotion.addEventListener("change", syncHue);
 
@@ -404,7 +426,8 @@
     if (theme === "system") delete document.documentElement.dataset.theme;
     else document.documentElement.dataset.theme = theme;
     // keep the meta in step with data-theme; rainbow follows the system scheme
-    document.querySelector('meta[name="color-scheme"]').content = theme === "light" || theme === "dark" ? theme : "light dark";
+    document.querySelector('meta[name="color-scheme"]').content =
+      theme === "light" || theme === "dark" ? theme : "light dark";
     document.querySelectorAll("[data-set-theme]").forEach((btn) => {
       btn.setAttribute("aria-pressed", String(btn.dataset.setTheme === theme));
     });
@@ -423,7 +446,7 @@
         if (lang) localStorage.setItem("lang", lang);
         else if (theme === "system") localStorage.removeItem("theme");
         else localStorage.setItem("theme", theme);
-      } catch (e) {}
+      } catch {}
     });
     setLang(document.documentElement.lang === "en" ? "en" : "ja");
     const topbar = document.querySelector(".topbar");
@@ -438,7 +461,8 @@
     // keep other open tabs in sync
     window.addEventListener("storage", (ev) => {
       if (ev.key === "lang" && (ev.newValue === "ja" || ev.newValue === "en")) setLang(ev.newValue);
-      else if (ev.key === "theme" || ev.key === null) setTheme(["light", "dark", "rainbow"].includes(ev.newValue) ? ev.newValue : "system");
+      else if (ev.key === "theme" || ev.key === null)
+        setTheme(["light", "dark", "rainbow"].includes(ev.newValue) ? ev.newValue : "system");
     });
 
     document.querySelectorAll(".river").forEach(river);
