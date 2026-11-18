@@ -45,21 +45,21 @@ def token() -> str:
 TOKEN = token()
 
 
-def request(url: str, data: dict | None = None) -> tuple[object, dict]:
+def request(url: str, data: dict | None = None, auth: bool = True) -> tuple[object, dict]:
     headers = {"Accept": "application/vnd.github+json", "User-Agent": f"{USER}.github.io updater"}
-    if url.startswith("https://api.github.com/"):
+    if auth and url.startswith("https://api.github.com/"):
         headers["Authorization"] = f"Bearer {TOKEN}"
     body = json.dumps(data).encode() if data is not None else None
     with urllib.request.urlopen(urllib.request.Request(url, body, headers), timeout=60) as res:
         return json.load(res), dict(res.headers)
 
 
-def rest(path: str) -> list[dict]:
+def rest(path: str, auth: bool = True) -> list[dict]:
     """GET a paginated list endpoint."""
     url: str | None = f"https://api.github.com{path}"
     items: list[dict] = []
     while url:
-        page, headers = request(url)
+        page, headers = request(url, auth=auth)
         items += page  # type: ignore[arg-type]
         m = re.search(r'<([^>]+)>; rel="next"', headers.get("Link", ""))
         url = m and m.group(1)
@@ -140,7 +140,8 @@ def update_pages(repos: list[dict]) -> None:
 
 def update_activity(repos: list[dict], today: str) -> None:
     years = list(range(FIRST_YEAR, int(today[:4]) + 1))
-    gists = rest(f"/users/{USER}/gists?per_page=100")
+    # the gists API rejects the Actions GITHUB_TOKEN (an installation token) with 403
+    gists = rest(f"/users/{USER}/gists?per_page=100", auth=False)
     prs, issues, commits = search_and_commits(years)
     bars = {
         "New repos": per_year([r["created_at"] for r in repos if not r["fork"]], years),
