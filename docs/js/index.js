@@ -419,6 +419,14 @@
       } catch (e) {}
     });
     setLang(document.documentElement.lang === "en" ? "en" : "ja");
+    const topbar = document.querySelector(".topbar");
+    new IntersectionObserver(([e]) => topbar.classList.toggle("at-top", e.isIntersecting), {
+      rootMargin: `-${topbar.offsetHeight}px 0px 0px 0px`,
+    }).observe(document.querySelector(".aa-fig .aa"));
+    topbar.querySelector(".home").addEventListener("click", (ev) => {
+      ev.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
+    });
     setTheme(document.documentElement.dataset.theme || "system");
     // keep other open tabs in sync
     window.addEventListener("storage", (ev) => {

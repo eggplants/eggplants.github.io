@@ -97,19 +97,31 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 .toc { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: var(--step--1); }
 .toc a { text-decoration: none; border-bottom: 1px solid var(--line); }
 
-section { display: flex; flex-direction: column; gap: 22px; scroll-margin-top: 16px; }
+section { display: flex; flex-direction: column; gap: 22px; scroll-margin-top: 68px; }
 .sec-head { display: flex; flex-direction: column; gap: 6px; }
 .sec-head h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); }
 .sec-head p { color: var(--muted); max-width: 42em; }
 
-.prefs { position: absolute; top: 16px; right: 0; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
-@media (scripting: none) { .prefs { display: none; } }
+/* fixed top bar; js/index.js adds .at-top while the masthead AA is in view,
+   which hides the mini AA (a back-to-top link) and the bar's backdrop */
+.topbar { position: fixed; inset: 0 0 auto; z-index: 10; padding-inline: clamp(16px, 4vw, 40px); background: color-mix(in srgb, var(--bg) 85%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); transition: background-color 0.2s, border-color 0.2s; }
+.topbar.at-top { background-color: transparent; border-bottom-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.topbar-in { max-width: 980px; margin: 0 auto; min-height: 52px; display: flex; align-items: center; gap: 8px; }
+.home { display: block; line-height: 0; text-decoration: none; transition: opacity 0.2s, visibility 0.2s; }
+.home pre { margin: 0; zoom: 0.36; font-family: var(--font-mono); font-size: 0.62rem; line-height: 1.15; color: var(--calyx); }
+.topbar.at-top .home { opacity: 0; visibility: hidden; }
+.prefs { margin-left: auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+@media (scripting: none) { .prefs .seg { display: none; } }
+.prefs .ext { display: inline-flex; align-items: center; gap: 5px; font-size: var(--step--1); padding: 3px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--muted); text-decoration: none; }
+.prefs .ext svg { width: 14px; height: 14px; }
+.prefs .ext:hover { color: var(--accent); border-color: var(--accent); }
 .seg { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .seg button { font: inherit; font-size: var(--step--1); padding: 3px 12px; border: 0; background: var(--surface); color: var(--muted); cursor: pointer; }
 .seg button + button { border-left: 1px solid var(--line); }
 .seg button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
 .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .theme button { display: grid; place-items: center; padding: 0; width: 2.2em; }
+.seg .abbr { display: none; }
 .theme svg { width: 15px; height: 15px; }
 
 /* links */
@@ -180,14 +192,26 @@ section { display: flex; flex-direction: column; gap: 22px; scroll-margin-top: 1
 }
 
 @media (max-width: 640px) {
-  .masthead { grid-template-columns: minmax(0, 1fr); padding-top: 16px; }
-  .prefs { position: static; grid-column: 1 / -1; }
+  .masthead { grid-template-columns: minmax(0, 1fr); }
   .projects { grid-template-columns: minmax(0, 1fr); }
   .ygrid { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .ygrid .spacer { display: none; }
   .bars .label { padding-top: 10px; }
 }
 
+/* keep the top bar on one line on phones: icon-only source link, tighter buttons */
+@media (max-width: 480px) {
+  .prefs { gap: 4px; }
+  .prefs .ext .t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .prefs .ext { padding-inline: 6px; }
+  .seg button { padding-inline: 8px; }
+  .seg .full { display: none; }
+  .seg .abbr { display: inline; }
+  .theme button { width: 2em; }
+  .home pre { zoom: 0.26; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .river.on .river-track { animation: none; }
+  .topbar, .home { transition: none; }
 }
