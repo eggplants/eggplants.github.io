@@ -19,7 +19,7 @@
   ];
 
   // [name, language, tags, [ja, en], created year, repo (default: eggplants/<name>)]
-  // non-archived eggplants repos pushed within a year (as of 2026-10-18), plus maintained external ones
+  // non-archived eggplants repos pushed within a year (as of 2026-11-19), plus maintained external ones
   const PROJECTS = [
     ["deepl-cli", "Python", ["cli", "lib", "scraping"], ["API キーなしで DeepL 翻訳を使える CLI", "DeepL Translator CLI that works without an API key"], 2020],
     ["get-pixivpy-token", "Python", ["cli"], ["pixivpy 用のトークン取得を自動化", "Gets your pixiv token for pixivpy"], 2021],
@@ -31,6 +31,7 @@
     ["mantela-editor", "TypeScript", ["app", "maint"], ["趣味の IP 電話網「東京広域電話網」の Mantela 編集 UI", "Mantela editor for tkytel, a hobbyist IP phone network in Tokyo"], 2025, "tkytel/mantela-editor"],
     ["awesome-japanese-censored-words", "Markdown", ["list", "data"], ["日本語の禁止語・自主規制語の情報源をまとめた Awesome リスト", "Awesome list of sources of Japanese censored words"], 2022],
     ["awesome-nano-syntax-highlighting", "Python", ["list", "dev"], ["GNU nano のシンタックスハイライト定義をまとめた Awesome リスト", "Curated GNU nano syntax highlighting files"], 2026],
+    ["kdg-list", "Shell", ["list", "data"], ["「漢字でGO!」の問題・答え・解説の一覧", "List of the questions, answers and explanations in Kanji de GO!, a kanji reading game"], 2023],
     ["dojinvoice_db", "Python", ["cli", "data", "scraping"], ["DLsite の同人音声作品のデータベースを作る CLI", "CLI that builds a database of DLsite doujin voice works"], 2020],
     ["zutool", "Python", ["cli", "lib"], ["頭痛ーるの非公式 API ラッパー", "Unofficial API wrapper for zutool (頭痛ーる), a headache forecast service"], 2023],
     ["saizeriya", "Python", ["cli", "fun"], ["サイゼリヤのテーブル注文を CLI/TUI で", "Unofficial CLI/TUI client for Saizeriya's table ordering"], 2026],
@@ -42,13 +43,16 @@
     ["scrapbox-client", "Python", ["cli", "lib"], ["Cosense (Scrapbox) の API クライアントと CLI", "API client and CLI for Cosense (Scrapbox)"], 2025],
     ["michixa", "Svelte", ["app"], ["道草屋ばっくやーどの非公式漫画ビューア", "Unofficial manga viewer for Michikusaya Backyard"], 2026],
     ["michikusa-works-checker", "HTML", ["app"], ["道草屋の作品の買い忘れチェッカー", "Checks which Michikusaya works you haven't bought yet"], 2026],
+    ["userscript", "JavaScript", ["app"], ["Greasy Fork と同期している自作ユーザースクリプト集", "My userscripts, synced with Greasy Fork"], 2021],
     ["eijiro-to-sqlite", "Python", ["cli", "data"], ["英辞郎の辞書データを SQLite に変換", "Converts the Eijiro dictionary to SQLite"], 2022],
     ["rqw", "Python", ["lib", "data"], ["SPARQL エンドポイントの Python ラッパー", "SPARQL endpoint wrapper for Python"], 2026],
     ["dbpedia-japanese-mirror", "HTML", ["server", "data"], ["DBpedia Japanese の SPARQL エンドポイントをどこでも立てる", "Hosts a DBpedia Japanese SPARQL endpoint anywhere"], 2026],
+    ["cve-by-pj", "Python", ["data"], ["ベンダー・製品ごとの公開 CVE 件数を年別・累計で集計", "Yearly and cumulative counts of published CVEs per vendor and product"], 2026],
     ["edcb-bridge", "Python", ["server"], ["KonomiTV から EPGStation / mirakc を使うための EDCB CtrlCmd 互換ブリッジ", "EDCB CtrlCmd-compatible bridge to EPGStation / mirakc for KonomiTV"], 2026],
     ["composefiles", "YAML", ["server"], ["自宅サーバ用の Docker Compose ファイル集", "My Docker Compose files"], 2021],
     ["locloc", "Python", ["app", "server", "dev"], ["オンラインの LOC カウンタとバッジ", "Online LOC counter and badge"], 2023],
     ["godlo", "Kotlin", ["app", "scraping"], ["yt-dlp / gallery-dl / getjmanga を使う Android 向けダウンローダ", "Android downloader using yt-dlp / gallery-dl / getjmanga"], 2026],
+    ["maydo", "Kotlin", ["app"], ["yt-dlp を内蔵した mpv ベースの Android 動画プレーヤー", "Android video player built on mpv with yt-dlp inside"], 2026],
     ["afxdl", "Python", ["cli", "scraping"], ["aphextwin.warp.net から音源をダウンロード", "Downloads audio from aphextwin.warp.net"], 2024],
     ["jason-json", "Python", ["cli", "scraping", "fun"], ["ジェーソン (jason.co.jp) の店舗情報を JSON に", "Builds JSON from the store list of Jason, a discount supermarket"], 2022],
     ["tsumanne", "Ruby", ["lib"], ["tsumanne.net の API ラッパー", "API wrapper for tsumanne.net"], 2023],
@@ -58,11 +62,14 @@
     ["pyproject-fmt-py", "Python", ["cli", "lib", "dev"], ["pyproject-fmt を純 Python で再実装した pyproject.toml フォーマッタ", "pyproject.toml formatter in pure Python, a reimplementation of pyproject-fmt"], 2026],
     ["cookiecutter-python", "Python", ["dev"], ["自作 Python プロジェクト用の Cookiecutter テンプレート", "Cookiecutter template for my Python projects"], 2026],
     ["gh-starlist", "Go", ["cli", "dev"], ["GitHub の Star リストを扱う gh 拡張", "GitHub CLI extension for GitHub Star Lists"], 2026],
+    ["yamartx", "Go", ["cli"], ["Yamaha RTX ルータの設定を TOML で宣言的に管理する CLI", "Declaratively manages Yamaha RTX router configs with a TOML file"], 2026],
     ["slgo", "Go", ["cli", "fun"], ["sl / sl-h コマンドの Go 移植", "Go port of the sl / sl-h commands"], 2026],
+    ["dev-null-tui", "Go", ["cli"], ["dev-null.sh のターミナルクライアント", "Terminal client for dev-null.sh"], 2026],
     ["contributter.sh", "Shell", ["cli", "fun"], ["Contributter をターミナルで", "Contributter on the terminal"], 2021],
     ["mb", "Shell", ["dev"], ["macOS・Termux・Ubuntu・Windows・NanoPi R6S で共通の mise 設定", "My global mise config for macOS, Termux, Ubuntu, Windows and NanoPi R6S"], 2026],
     ["homebrew-tap", "Ruby", ["dev"], ["自作ツールの Homebrew tap", "Homebrew tap for my tools"], 2023],
     ["validate-ubuntu-autoinstall-docker", "Dockerfile", ["dev"], ["Ubuntu Server の autoinstall 設定を Docker 上で検証", "Validates Ubuntu Server autoinstall configs on Docker"], 2026],
+    ["rust-cmd-practice", "Rust", ["study"], ["『Command-Line Rust』を読みながら書いた練習コード", "Practice code written while reading Command-Line Rust"], 2024],
   ];
   // [name, language, tags, [ja, en], created year, archived year]
   // public non-fork archived eggplants repos (as of 2026-11-19), most recently archived first
